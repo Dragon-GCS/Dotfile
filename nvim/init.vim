@@ -1,9 +1,8 @@
-"KeyMap
+" Key Remapping
 imap jk <Esc>
-nmap <space> :
-nnoremap tn  :tabnew<space>
-nnoremap tk  :tabnext<CR>
-nnoremap tj  :tabprev<CR>
+nnoremap tn  :tabnew<CR>
+nnoremap tj  :tabnext<CR>
+nnoremap tk  :tabprev<CR>
 nnoremap tc  :tabclose<CR>
 let mapleader =','
 
@@ -11,6 +10,7 @@ let mapleader =','
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+" set the runtime path to include Vundle and initialize
 call plug#begin('~/.vim/plugged')
 
 " Color Schemes
@@ -121,7 +121,6 @@ let g:coc_global_extensions = [
   \ 'coc-eslint',
   \ 'coc-prettier',
   \ 'coc-json',
-  \ "coc-jedi"
   \ ]
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -187,8 +186,17 @@ endfunction
 Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
+" ES2015 code snippets (Optional)
+Plug 'epilande/vim-es2015-snippets'
+" React code snippets
+Plug 'epilande/vim-react-snippets'
+
+let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 " FZF
-Plug 'junegunn/fzf', { 'dir': '~/.vim/plugged/fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
@@ -247,6 +255,29 @@ Plug 'airblade/vim-gitgutter'
 Plug 'Chiel92/vim-autoformat'
 nnoremap <Leader><Leader>a :Autoformat<cr>
 
+" Plugins for Javascript
+Plug 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript'
+Plug 'isRuslan/vim-es6'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tomtom/tcomment_vim'
+Plug 'mattn/emmet-vim'
+Plug 'elzr/vim-json'
+Plug 'mxw/vim-jsx'
+Plug 'ap/vim-css-color'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'styled-components/vim-styled-components'
+
+" JSX
+let g:jsx_ext_required = 0
+let g:user_emmet_settings = {
+      \  'javascript' : {
+      \      'extends' : 'jsx',
+      \  },
+      \}
+
 " Trailing Space
 Plug 'bronson/vim-trailing-whitespace'
 " Removes trailing spaces
@@ -269,6 +300,14 @@ endfunc
 func! Multiple_cursors_after()
     call deoplete#init#_enable()
 endfunc
+
+" Plugins for Ruby
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+
+" Plugins for Elixir
+Plug 'elixir-lang/vim-elixir'
+Plug 'slashmili/alchemist.vim'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -324,6 +363,8 @@ highlight NERDTreeFile ctermfg=14
 " Highlight All Search Pattern
 set hlsearch
 
+" Javascript syntax fix
+autocmd BufRead *.jsx set syntax=javascript
 
 " Split remapping
 nnoremap <C-j> <C-W><C-J>
