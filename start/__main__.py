@@ -10,6 +10,7 @@ if __name__ == "__main__":
     parse = ArgumentParser("Start a new project with python vitrual environment, move this module to python site-packages dir")
     parse.add_argument("project_name", nargs="?", help="Name of new project")
     parse.add_argument("-P", "--package", default=[], action="extend", nargs="*", help="auto install packages in vitrual environment")
+    parse.add_argument("-r", "--requirement", nargs="?", help="requirement file of packages to install")
     parse.add_argument("-n", "--vname", default=".venv", help="Name of virtual environment dir")
     parse.add_argument("-u", "--upgrade", action="store_true", help="upgrade pip to newest version")
     parse.add_argument("-f", "--force", action="store_true", help="Replace the old environment if it was exist")
@@ -51,6 +52,14 @@ if __name__ == "__main__":
     if os.path.exists(default_packages):
         with open(default_packages) as f:
             args.package.extend(f.readlines())
+
+    # 使用文件安装包
+    if args.requirement:
+        try:
+            with open(args.requirement) as f:
+                args.package.extend(f.readlines())
+        except FileNotFoundError as e:
+            print(e)
 
     # 虚拟环境检查
     if os.path.isdir(env_dir):
