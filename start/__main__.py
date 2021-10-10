@@ -49,7 +49,7 @@ if __name__ == "__main__":
                "-m", "pip", "install"]
 
     # 添加默认安装包
-    if os.path.exists(default_packages):
+    if os.path.isfile(default_packages):
         with open(default_packages) as f:
             args.package.extend(f.readlines())
 
