@@ -1,5 +1,5 @@
 # copy this module to pip packages dir
-from os import path, listdir, mkdir
+from os import path, listdir, mkdir, makedirs
 import shutil
 
 VERSION = "1.0.0"
@@ -14,13 +14,16 @@ def copyFile(target_dir:str):
     module_dir = path.dirname(__file__)
     module_name = path.basename(module_dir)
 
-    if (file:=path.dirname(module_dir)) == target_dir:
+    if (path.dirname(module_dir)) == target_dir:
         print(f"Module '{module_name}' is already installed")
         return
 
+    tar = path.join(target_dir, module_name)
+    if not path.isdir(tar):
+        makedirs(tar)
+
     for file in listdir(module_dir):
         src = path.join(module_dir, file)
-        tar = path.join(target_dir, module_name)
         if path.isfile(src):
             shutil.copy(src, tar)
 
