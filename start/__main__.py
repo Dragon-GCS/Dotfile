@@ -44,8 +44,8 @@ if __name__ == "__main__":
 
     # 使用虚拟环境解释器启动pip
     pip_cmd = [os.path.abspath(os.path.join(env_dir,
-                                               interpreter_dir,
-                                               os.path.basename(sys.executable))),
+                                            interpreter_dir,
+                                            os.path.basename(sys.executable))),
                "-m", "pip", "install"]
 
     # 添加默认安装包
@@ -53,13 +53,14 @@ if __name__ == "__main__":
         with open(default_packages) as f:
             args.package.extend(f.readlines())
 
+    options = []
+    # 安装指定包
+    if args.package:
+        options += args.package
+
     # 使用文件安装包
     if args.requirement:
-        try:
-            with open(args.requirement) as f:
-                args.package.extend(f.readlines())
-        except FileNotFoundError as e:
-            print(e)
+        options += ["-r", args.requirement]
 
     # 虚拟环境检查
     if os.path.isdir(env_dir):
@@ -81,9 +82,9 @@ if __name__ == "__main__":
             print("Upgrade pip to newest version")
             subprocess.run(pip_cmd + ["--upgrade", "pip"])
 
-        if args.package:
+        if options:
             print("Installing packages")
-            subprocess.run(pip_cmd + args.package)
+            subprocess.run(pip_cmd + options)
 
         print("Create environment successed, activate the vitrual environment by the following command:")
         print(activate_cmd)
