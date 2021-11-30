@@ -1,5 +1,4 @@
 import os
-import shutil
 import sys
 import subprocess
 
@@ -28,6 +27,7 @@ if __name__ == "__main__":
             f.writelines(map(lambda pack: pack + '\n', args.default))
 
     if not args.project_name:
+        print("Please choose dir to create venv")
         exit()
 
     # 虚拟环境位置
@@ -42,6 +42,8 @@ if __name__ == "__main__":
         activate_cmd = " ".join(["source", activate_script])
         interpreter_dir = "bin"
 
+    # 创建虚拟环境命令
+    venv_cmd = [sys.executable, "-m", "venv", env_dir]
     # 使用虚拟环境解释器启动pip
     pip_cmd = [os.path.abspath(os.path.join(env_dir,
                                             interpreter_dir,
@@ -66,8 +68,8 @@ if __name__ == "__main__":
     if os.path.isdir(env_dir):
         print(f"File '{env_dir}' was already exists, ", end="")
         if args.force:
-            print("removing the old environment")
-            shutil.rmtree(env_dir)
+            print("it will be removed")
+            venv_cmd += ["--clear"]
         else:
             print("Add '-f' or '--force'to remove the old environment")
             print("Or activate the existed vitrual environment by the following command:")
@@ -76,7 +78,7 @@ if __name__ == "__main__":
     # 启动安装
     try:
         print("Creating virtual environment")
-        subprocess.run([sys.executable, "-m", "venv", env_dir])
+        subprocess.run(venv_cmd)
 
         if args.upgrade:
             print("Upgrade pip to newest version")
