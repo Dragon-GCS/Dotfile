@@ -7,7 +7,7 @@ from platform import system
 
 if __name__ == "__main__":
     parse = ArgumentParser(prog="start", description="Start a new project with python vitrual environment, move this module to python site-packages dir")
-    parse.add_argument("project_name", nargs="?", help="Name of new project")
+    parse.add_argument("project_name", default=".", nargs="?", help="Name of new project, default is current folder")
     parse.add_argument("-P", "--package", default=[], action="extend", nargs="*", help="Package which will be auto installed after created environment")
     parse.add_argument("-r", "--requirement", nargs="?", help="Requirement file of packages to install")
     parse.add_argument("-n", "--vname", default=".venv", help="Name of virtual environment dir, default to '.venv'")
@@ -77,7 +77,7 @@ if __name__ == "__main__":
 
     # 启动安装
     try:
-        print("Creating virtual environment")
+        print(f"Creating virtual environment as folder: {os.path.abspath(args.project_name)}")
         subprocess.run(venv_cmd)
 
         if args.upgrade:
