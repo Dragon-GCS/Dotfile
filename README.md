@@ -14,7 +14,7 @@ bash配置，启用starship
 
 ## start/
 
-* cd至本目录后，使用`python3 start.install` 将包安装至pip的包文件夹中
+* cd至`start`目录后，使用`pip install .` 将包安装至pip的包文件夹中
 
 * `python3 -m start <project_name>` 用于新的python项目时新建虚拟环境并安装指定包
 
