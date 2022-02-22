@@ -1,6 +1,7 @@
 import os
 import sys
 import subprocess
+import time
 
 from argparse import ArgumentParser
 from platform import system
@@ -82,6 +83,8 @@ if __name__ == "__main__":
 
         if args.upgrade:
             print("Upgrade pip to newest version")
+            if system() == "Windows":
+                time.sleep(3)   # wait to release handle of pip file
             subprocess.run(pip_cmd + ["--upgrade", "pip"])
 
         if options:
