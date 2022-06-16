@@ -7,14 +7,14 @@ from argparse import ArgumentParser
 from platform import system
 
 if __name__ == "__main__":
-    parse = ArgumentParser(prog="start", description="Start a new project with python vitrual environment, move this module to python site-packages dir")
+    parse = ArgumentParser(prog="start", description="Start a new project with python virtual environment, move this module to python site-packages dir")
     parse.add_argument("project_name", default=".", nargs="?", help="Name of new project, default is current folder")
     parse.add_argument("-P", "--package", default=[], action="extend", nargs="*", help="Package which will be auto installed after created environment")
     parse.add_argument("-r", "--requirement", nargs="?", help="Requirement file of packages to install")
     parse.add_argument("-n", "--vname", default=".venv", help="Name of virtual environment dir, default to '.venv'")
     parse.add_argument("-u", "--upgrade", action="store_true", help="Upgrade pip to newest version when create the environment")
     parse.add_argument("-f", "--force", action="store_true", help="Replace the old environment if it was exist")
-    parse.add_argument("--default", default=[], action="extend", nargs='*', help="Save some package which will be auto install when a new vitrual environment was be created.")
+    parse.add_argument("--default", default=[], action="extend", nargs='*', help="Save some package which will be auto install when a new virtual environment was be created.")
     parse.add_argument("--remove_default", action="store_true", help="Remove saved packages which will be auto install.")
     args = parse.parse_args()
 
@@ -73,7 +73,7 @@ if __name__ == "__main__":
             venv_cmd += ["--clear"]
         else:
             print("Add '-f' or '--force'to remove the old environment")
-            print("Or activate the existed vitrual environment by the following command:")
+            print("Or activate the existed virtual environment by the following command:")
             exit(f"'{activate_cmd}'")
 
     # 启动安装
@@ -91,7 +91,7 @@ if __name__ == "__main__":
             print("Installing packages")
             subprocess.run(pip_cmd + options)
 
-        print("Create environment successed, activate the vitrual environment by the following command:")
+        print("Create environment succeed, activate the virtual environment by the following command:")
         print(activate_cmd)
 
     except Exception as e:
