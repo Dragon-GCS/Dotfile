@@ -1,0 +1,14 @@
+# 设置配置范例，开启编辑器的自动补全
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# 在命令之间插入空行
+add_newline = true
+
+[hostname]
+ssh_only = false
+format = "[$ssh_symbol@$hostname]($style) in "
+
+# User module
+[username]
+format = "[$user]($style)"
+show_always = true
