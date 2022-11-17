@@ -1,3 +1,4 @@
+# reference: https://starship.rs/zh-CN/config
 # 设置配置范例，开启编辑器的自动补全
 "$schema" = 'https://starship.rs/config-schema.json'
 
