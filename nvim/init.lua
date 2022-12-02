@@ -1,0 +1,12 @@
+require("base")
+require("keymap")
+require("color")
+require("plugin")
+require("lsp")
+require("other")
+require("p-telescope")
+require("p-lualine")
+require("p-cmp")
+require("p-kind")
+require("p-treesitter")
+

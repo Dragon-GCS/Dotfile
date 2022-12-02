@@ -7,9 +7,13 @@ add_newline = true
 
 [hostname]
 ssh_only = false
-format = "[$ssh_symbol@$hostname]($style) in "
+format = "[@$hostname]($style) in "
 
 # User module
 [username]
 format = "[$user]($style)"
-show_always = true
+# show_always = true
+
+[container]
+symbol = "📦"
+format = "[$symbol]($style) "
