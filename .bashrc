@@ -1,4 +1,5 @@
 eval "$(starship init bash)"
+eval "$(zoxide init bash)"
 
 # set alias
 alias ll='exa -l'
